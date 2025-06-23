@@ -1,0 +1,4 @@
+url = "https://example.com"
+name = "Example"
+description = "This is an example"
+plugin_path = "test/plugin.so"

@@ -3,4 +3,12 @@ name = "starsector-mod-manager"
 version = "0.1.0"
 edition = "2024"
 
+[workspace]
+members = [
+    "crates/"
+]
+
 [dependencies]
+log = "0.4.27"
+log4rs = "1.3.0"
+mod-downloader = { path = "crates/mod-downloader" }

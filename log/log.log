@@ -1,0 +1,4 @@
+2025-06-12T07:31:33.036405402+08:00 - 使用方法: target/debug/mod-src <模组URL>
+2025-06-12T07:32:38.839532542+08:00 - 使用方法: target/debug/mod-src <模组URL>
+2025-06-12T07:32:52.868889118+08:00 - Mod source: SourceConfig { url: "https://example.com", name: "Example", description: "This is an example" }
+2025-06-12T07:48:43.260371164+08:00 - Mod source: SourceConfig { url: "https://www.fossic.org/topic-mod_index.html", name: "远行星号中文论坛", description: "远行星号中文论坛的模组源" }

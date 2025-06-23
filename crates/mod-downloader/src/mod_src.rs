@@ -3,10 +3,10 @@ use reqwest::Body;
 use serde::{Deserialize, Serialize};
 
 // 获取mod列表的函数类型 参数为html内容 返回值为mod列表
-type GetModListFunc = fn(String) -> Vec<ModInfo>;
 
+#[repr(C)]
 #[derive(Debug)]
-pub  struct ModSource {
+pub struct ModSource {
     config: SourceConfig,
     http_client: reqwest::Client,
     mod_list: Vec<ModInfo>,
@@ -14,14 +14,6 @@ pub  struct ModSource {
     get_mod_info_func: GetModListFunc,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct ModInfo {
-    name: String,
-    version: String,
-    url: String,
-    date: String,
-    author: String,
-}
 
 impl ModSource {
 
@@ -45,6 +37,14 @@ impl ModSource {
             get_mod_list_func: Self::default_get_mod_list_func,
             get_mod_info_func: Self::default_get_mod_list_func
         }
+    }
+
+    pub fn list_mods(&self) -> &Vec<ModInfo> {
+        &self.mod_list
+    }
+
+    pub fn mods_as_mut(&mut self) -> &mut Vec<ModInfo> {
+        &mut self.mod_list
     }
 
     pub fn config(&self) -> &SourceConfig {

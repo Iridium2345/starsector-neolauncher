@@ -1,9 +1,0 @@
-[package]
-name = "mod-src"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
-mod-downloader = { path = "../../../mod-downloader" }
-log = "0.4.27"
-log4rs = "1.3.0"
