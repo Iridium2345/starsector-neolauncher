@@ -1,4 +1,6 @@
 url = "https://example.com"
 name = "Example"
 description = "This is an example"
-plugin_path = "test/plugin.so"
+mod_info_selector = "li.portal_mod_list_item"
+mod_list_selector = "li.portal_mod_list_item"
+plugin = "example"

@@ -1,5 +1,4 @@
 use std::fmt::Debug;
-use std::collections::HashMap;
 use serde::{Deserialize,Serialize};
 
 #[repr(C)]
@@ -7,12 +6,12 @@ use serde::{Deserialize,Serialize};
 pub struct SourceConfig {
     url: String,
     name: String,
-    #[serde(default = "unknown")]
-    description: String,
-    #[serde(alias = "mod-list-xpath")]
-    mod_list_xpath: String,
-    #[serde(alias = "mod-info-xpath")]
-    mod_info_xpath: String,
+    description: Option<String>,
+    plugin: String,
+    #[serde(alias = "mod-list-selector")]
+    mod_list_selector: String,
+    #[serde(alias = "mod-info-selector")]
+    mod_info_selector: String,
 }
 
 impl Default for SourceConfig {
@@ -20,21 +19,21 @@ impl Default for SourceConfig {
         Self {
             url: "".to_string(),
             name: "".to_string(),
-            description: "".to_string(),
-            mod_list_xpath: "".to_string(),
-            mod_info_xpath: "".to_string(),
-            client_config: HashMap::new()
+            plugin: "".to_string(),
+            description: None,
+            mod_list_selector: "".to_string(),
+            mod_info_selector: "".to_string(),
         }
     }
 }
 
 impl SourceConfig {
-    pub fn from_toml(toml: &str) -> Result<Self> {
+    pub fn from_toml(toml: &str) -> Result<Self, Box<dyn std::error::Error>> {
         let config: SourceConfig = toml::from_str(toml)?;
         Ok(config)
     }
 
-    pub fn from_file(file: &str) -> Result<Self> {
+    pub fn from_file(file: &str) -> Result<Self, Box<dyn std::error::Error>> {
         let toml = std::fs::read_to_string(file)?;
         Self::from_toml(&toml)
     }
@@ -47,20 +46,19 @@ impl SourceConfig {
         &self.name
     }
 
-    pub fn description(&self) -> &str {
-        &self.description
+    pub fn description(&self) -> Option<&str> {
+        self.description.as_deref()
     }
 
-    pub fn mod_list_xpath(&self) -> &str {
-        &self.mod_list_xpath
+    pub fn plugin(&self) -> &str {
+        &self.plugin
     }
 
-    pub fn mod_info_xpath(&self) -> &str {
-        &self.mod_info_xpath
+    pub fn mod_list_selector(&self) -> &str {
+        &self.mod_list_selector
     }
 
-    pub fn client_config(&self) -> &HashMap<String,String> {
-        &self.client_config
+    pub fn mod_info_selector(&self) -> &str {
+        &self.mod_info_selector
     }
-
 }

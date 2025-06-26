@@ -1,3 +1,6 @@
 url = "https://www.fossic.org/topic-mod_index.html"
 name = "远行星号中文论坛"
 description = "远行星号中文论坛的模组源"
+plugin = "fossic_cn"
+mod_info_selector = ".portal_mod_list_item"
+mod_list_selector = "enum_mods"

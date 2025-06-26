@@ -1,0 +1,12 @@
+[package]
+name = "fossic-cn"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+sources-manager = { path = "../../crates/sources-manager" }
+scraper = "0.23.1"
+log = "0.4.27"
+
+[lib]
+crate-type = ["dylib"]
