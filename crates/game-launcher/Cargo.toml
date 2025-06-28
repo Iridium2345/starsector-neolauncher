@@ -1,0 +1,9 @@
+[package]
+name = "game-launcher"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+serde = { version = "1.0.219", features = ["derive"] }
+serde_yaml = "0.9"
+log = "0.4.27"

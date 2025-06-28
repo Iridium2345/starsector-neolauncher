@@ -1,0 +1,121 @@
+platform : "linux"
+game_version : "0.98RC-7"
+main_class : "com.fs.starfarer.StarfarerLauncher"
+working_dir : "/home/Iridium2345/starsector/starsector"
+
+stdout: $LAUNCHER_DIR/log/starsector/stdout.log
+stderr: $LAUNCHER_DIR/log/starsector/stderr.log
+log4j: $LAUNCHER_DIR/setting/log4j.properties
+
+path:
+    java : "$WORKING_DIR/jre_linux/bin/java"
+    jars : "$WORKING_DIR/"
+    native : "$WORKING_DIR/native"
+    mod : "$LAUNCHER_DIR/mods"
+    save : "$WORKING_DIR/saves"
+    screenshots : "$WORKING_DIR/screenshots"
+    log : "$LAUNCHER_DIR/log/starsector"
+
+args: 
+    game: []
+    jvm: 
+        memory :
+            stack : 4 
+            min : 2048
+            max : 4096
+        jmodules: 
+            open :                 
+                java.base/sun.nio.ch : ALL-UNNAMED
+                java.base/java.nio : ALL-UNNAMED
+                # java.base/java.nio.Buffer.UNSAFE : ALL-UNNAMED
+                java.base/java.util : ALL-UNNAMED
+                java.base/java.util.concurrent : ALL-UNNAMED
+                java.base/java.util.concurrent.locks : ALL-UNNAMED
+                java.base/jdk.internal.ref : ALL-UNNAMED
+                java.base/java.lang.reflect : ALL-UNNAMED
+                java.base/java.lang.ref : ALL-UNNAMED
+                java.base/java.text : ALL-UNNAMED
+                java.desktop/java.awt.font : ALL-UNNAMED
+                # java.desktop/java.awt.Rectangle : ALL-UNNAMED
+                java.desktop/java.awt : ALL-UNNAMED
+            export : 
+                java.base/jdk.internal.ref : ALL-UNNAMED
+                java.base/jdk.internal.misc : ALL-UNNAMED
+                java.base/sun.nio.ch : ALL-UNNAMED
+        
+        jvm_args:            
+            - Djava.util.Arrays.useLegacyMergeSort=true
+            - Dcom.fs.starfarer.settings.linux=true 
+            - Dfile.encoding=UTF-8
+            - Xlog:async
+            - -enable-preview
+            # - noverify
+        
+        vm:
+            - +UnlockDiagnosticVMOptions
+            - +UnlockExperimentalVMOptions
+            - +ShowCodeDetailsInExceptionMessages
+            - +ExtensiveErrorReports
+            - +ShowMessageBoxOnError
+            - +PrintCommandLineFlags
+            - +TieredCompilation
+            - -UseCondCardMark
+            - +UseFastStosb
+            - +AlwaysCompileLoopMethods
+            - TieredStopAtLevel=4
+            - TrimNativeHeapInterval=60000
+            - UseAVX=3
+            - AVX3Threshold=0
+            - UseSSE=4
+            - +UseSSE42Intrinsics
+            - +UseCompressedOops
+            - +UseCompressedClassPointers
+            - +UseFMA
+            - +UseBMI1Instructions
+            - +UseBMI2Instructions
+            - +UseCLMUL
+            - +UseFastUnorderedTimeStamps
+            - +UseUnalignedLoadStores
+            - +UseXMMForArrayCopy
+            - +UseXMMForObjInit
+            - +UseXmmI2D
+            - +UseXmmI2F
+            - +DisableExplicitGC
+            - +AlwaysPreTouch
+            - +ParallelRefProcEnabled
+            - +UseShenandoahGC
+            - ShenandoahGCMode=iu
+            - ShenandoahGCHeuristics=compact
+            - ShenandoahAllocationThreshold=85
+            - ShenandoahGuaranteedGCInterval=0
+            - +ZeroTLAB
+            - +SegmentedCodeCache
+            - +AlwaysAtomicAccesses
+            - +UseStringDeduplication
+            - -DontCompileHugeMethods
+            - Tier0Delay=1
+            - +UseFPUForSpilling
+            - +EnableVectorAggressiveReboxing
+            - +EnableVectorReboxing
+            - +EnableVectorSupport
+            - -AlignVector
+            - TieredOldPercentage=10000
+            - Tier0ProfilingStartPercentage=2000
+            - IncreaseFirstTierCompileThresholdAt=99
+            - InterpreterProfilePercentage=99
+            - +UseVectorCmov
+            - +UseVectorStubs
+            - ReferencesPerThread=0
+            - MaxGCPauseMillis=10
+            - -EnableThreadSMRStatistics
+            - +UseUnalignedAccesses
+            - PerMethodRecompilationCutoff=100000
+            - ProfileMaturityPercentage=100
+            - NmethodSweepActivity=1
+            - ThreadPriorityPolicy=1
+            - ReservedCodeCacheSize=256m
+            - +PrintCodeCache
+            - -UseDynamicNumberOfCompilerThreads
+            - CompilerDirectivesFile=./compiler_directives.txt
+            - -BytecodeVerificationLocal
+            - -BytecodeVerificationRemote

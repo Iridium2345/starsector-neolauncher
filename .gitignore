@@ -9,3 +9,5 @@
 **.so
 **.dylib
 **.log
+log/
+mods
