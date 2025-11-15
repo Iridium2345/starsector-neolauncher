@@ -9,11 +9,11 @@ const LIB_DIR: &str = "linux";
 #[cfg(target_os = "macos")]
 const LIB_DIR: &str = "macos";
 
-const CLASSPATH_SEPARATOR: &str = if cfg!(target_os = "windows") {
-    ";"
-} else {
-    ":"
-};
+#[cfg(target_os = "windows")]
+const CLASSPATH_SEPARATOR: &str = ";";
+
+#[cfg(not(target_os = "windows"))]
+const CLASSPATH_SEPARATOR: &str = ":";
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PathConfig {
@@ -96,9 +96,19 @@ impl LaunchConfig {
         Ok(config)
     }
 
+    pub fn from_toml(toml: &str) -> Result<Self, Box<dyn std::error::Error>> {
+        let mut config: LaunchConfig = toml::from_str(toml)?;
+        config.file_path = None;        
+        Ok(config)
+    }
+
     pub fn from_file(path: &str) -> Result<Self, Box<dyn std::error::Error>> {
-        let yaml = std::fs::read_to_string(path)?;
-        let mut config = Self::from_yaml(&yaml)?;
+        let content = std::fs::read_to_string(path)?;
+        let mut config = if path.ends_with(".toml") {
+            Self::from_toml(&content)?
+        } else {
+            Self::from_yaml(&content)?
+        };
         config.file_path = Some(path.to_string());
         Ok(config)
     }
